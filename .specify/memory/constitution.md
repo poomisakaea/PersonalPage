@@ -1,50 +1,88 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+
+Version change: unknown -> 1.0.0
+
+Modified principles:
+- (new) PRINCIPLE_1 -> ชัดเจนและกระชับ
+- (new) PRINCIPLE_2 -> มือถือเป็นอันดับแรก (Responsive)
+- (new) PRINCIPLE_3 -> การเข้าถึง (Accessibility)
+- (new) PRINCIPLE_4 -> ประสิทธิภาพและความเป็นส่วนตัว
+- (new) PRINCIPLE_5 -> ความเรียบง่ายและการบำรุงรักษา
+
+Added sections:
+- ข้อจำกัดทางเทคนิค
+- กระบวนการพัฒนา
+
+Removed sections: none
+
+Templates requiring updates:
+- .specify/templates/plan-template.md: ✅ aligned (no edit required)
+- .specify/templates/spec-template.md: ✅ aligned (no edit required)
+- .specify/templates/tasks-template.md: ✅ aligned (no edit required)
+- .specify/templates/checklist-template.md: ✅ aligned (no edit required)
+- .specify/templates/agent-file-template.md: ✅ aligned (no edit required)
+
+Follow-up TODOs:
+- RATIFICATION_DATE set to adoption date (2025-11-10). No deferred placeholders remain.
+-->
+
+# รัฐธรรมนูญ: หน้าเว็บบุคคล
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### ชัดเจนและกระชับ
+ทุกหน้าต้อง "ต้อง" ถ่ายทอดข้อมูลสำคัญให้เห็นได้ทันที: ชื่อ (หรือชื่อที่ใช้งาน), บทบาท/คำอธิบายสั้น ๆ, วิธีติดต่อที่ชัดเจน และลิงก์สำคัญ (เช่น CV, โซเชียลหลัก, โปรเจคตัวอย่าง). ข้อมูลต้องเรียงลำดับตามลำดับความสำคัญและไม่เกินความจำเป็นเพื่อรักษาความเข้าใจได้ง่าย.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+เหตุผล: หน้าเดียวต้องทำหน้าที่เป็นบัตรแนะนำตัวที่อ่านเข้าใจได้ภายใน 5–10 วินาที.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### มือถือเป็นอันดับแรก (Responsive)
+เนื้อหาทุกชิ้น "ต้อง" แสดงผลได้ดีบนหน้าจอมือถือด้วยการจัดวางที่ตอบสนองและการปรับขนาดภาพ/ตัวอักษร. การทดสอบบนมือถือ (viewport ขนาดต่าง ๆ) ต้องถูกรันก่อนปล่อยเวอร์ชันใหม่.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+เหตุผล: ผู้ชมส่วนใหญ่เข้าจากมือถือ การออกแบบ mobile-first ลดงานแก้ไขซ้ำและปรับปรุงประสบการณ์ผู้ใช้.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### การเข้าถึง (Accessibility)
+เว็บไซต์ "ต้อง" ปฏิบัติตามแนวทางพื้นฐานของการเข้าถึง: โครงสร้าง HTML เชิงความหมาย, ข้อความสำรอง (alt) สำหรับภาพ, คอนทราสต์สีที่เพียงพอ, สามารถนำทางด้วยคีย์บอร์ด, และมีโครงร่างมุมมองสำหรับเครื่องช่วยอ่าน (screen readers). ทุกหน้าที่เผยแพร่ "ต้อง" ผ่านการตรวจสอบด้วยเครื่องมือ accessibility ขั้นพื้นฐาน.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+เหตุผล: การเข้าถึงเป็นข้อบังคับด้านสากลที่เพิ่มผู้ชมและลดข้อร้องเรียน.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### ประสิทธิภาพและความเป็นส่วนตัว
+หน้าเว็บ "ต้อง" มีขนาดเล็ก โหลดเร็ว (เป้าหมาย: <1MB โดยรวมสำหรับหน้าเริ่มต้นเมื่อเป็นไปได้) และจำกัดการโหลดสคริปต์ของบุคคลที่สาม. การติดตาม (analytics) ต้องเป็นแบบ opt-in หรือปิดโดยค่าเริ่มต้น; หากมีสคริปต์จากภายนอกให้ระบุเหตุผลและประเมินความเสี่ยงด้านความเป็นส่วนตัว.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+เหตุผล: ประสิทธิภาพช่วยประสบการณ์ผู้ใช้และ SEO; ความเป็นส่วนตัวเป็นมาตรฐานที่ดีต่อผู้เยี่ยมชม.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### ความเรียบง่ายและการบำรุงรักษา
+ซอร์สโค้ด "ต้อง" อยู่ภายใต้การควบคุมเวอร์ชัน (เช่น Git) และมีไฟล์ README สั้น ๆ สำหรับขั้นตอนการพัฒนา/ดีพลอย. การเปลี่ยนแปลงเนื้อหาเล็กน้อยควรทำได้ด้วยการแก้ไฟล์ข้อความง่าย ๆ ไม่จำเป็นต้องใช้งานหนักของระบบ. เวอร์ชันของเอกสาร/เนื้อหาใช้ MAJOR.MINOR.PATCH สำหรับการเปลี่ยนแปลงที่ชัดเจน.
+
+เหตุผล: ความเรียบง่ายลดภาระบำรุงรักษาและทำให้การอัพเดตปลอดภัยและรวดเร็ว.
+
+## ข้อจำกัดทางเทคนิค
+เทคโนโลยีพื้นฐานต้องเป็นไปเพื่อรองรับหลักการข้างต้น:
+
+- โครงสร้าง: Static-first (HTML/CSS/JS) หรือ SSG (เช่น eleventy, Hugo) ถ้ามีความจำเป็น
+- ห้ามใช้เฟรมเวิร์กขนาดใหญ่โดยไม่มีเหตุผล (เช่น แค่เพื่อหน้าเดียว) เว้นแต่จะมีข้อดีชัดเจน
+- รูปภาพต้องถูกบีบอัดและให้ขนาดที่เหมาะสม (responsive images)
+- ฟอนต์เว็บ: เลือกฟอนต์ที่รองรับภาษาไทยและโหลดแบบ performance-conscious (prefetch/preload เมื่อเหมาะสม)
+- การทดสอบ: lint (HTML/CSS/JS), accessibility check และ performance audit เป็นขั้นตอนใน pipeline ก่อน deploy
+
+## กระบวนการพัฒนา
+
+- Workflow: ทุกการเปลี่ยนแปลงเข้าผ่าน Pull Request (หรือ commit ที่มีประวัติชัดเจนถ้าเป็นโครงการส่วนตัว)
+- Review: เจ้าของโครงการ (หรือผู้ดูแลที่ได้รับมอบหมาย) ต้องตรวจสอบและอนุมัติ PR ก่อน merge
+- Quality gates: PR ต้องผ่าน linter, basic accessibility check, และตรวจสอบภาพ/ขนาดโหลด
+- Deployment: แนะนำเป็น static host (GitHub Pages, Netlify, Vercel) พร้อม rollback ง่าย
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+การปกครองของรัฐธรรมนูญนี้มีหลักการดังนี้:
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+- การแก้ไข: การแก้ไขต้องทำเป็น Pull Request พร้อมคำอธิบายเหตุผลและรายการผลกระทบ. เจ้าของโครงการต้องอนุมัติการเปลี่ยนแปลงเพื่อให้มีผลบังคับ.
+- นโยบายการขึ้นเวอร์ชัน:
+	- MAJOR: เมื่อลบหรือเปลี่ยนแปลงหลักการในเชิงปฏิบัติที่ทำให้ไม่เข้ากันกับนโยบายเดิม (breaking governance changes).
+	- MINOR: เมื่อตั้งหลักการใหม่หรือขยายคำแนะนำอย่างมีนัยสำคัญ.
+	- PATCH: การแก้ไขคำอธิบาย คำสะกด หรือชี้แจงที่ไม่เปลี่ยนแก่นสาร.
+- การตรวจสอบการปฏิบัติตาม: ทุกแผน/feature ที่ใช้ template ต้องรวมส่วน "Constitution Check" ซึ่งระบุการทดสอบ/กฎที่ถูกต้องตามหลักการ (เช่น accessibility, mobile-first, privacy).
+- ความรับผิดชอบ: เจ้าของโครงการเป็นผู้รับผิดชอบสูงสุดในการตีความและบังคับใช้รัฐธรรมนูญ แต่การปฏิบัติตามควรถูกตรวจสอบโดยเครื่องมืออัตโนมัติเมื่อเป็นไปได้.
+
+**Version**: 1.0.0 | **Ratified**: 2025-11-10 | **Last Amended**: 2025-11-10
+
