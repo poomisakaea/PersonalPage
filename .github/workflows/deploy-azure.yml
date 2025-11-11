@@ -1,0 +1,129 @@
+name: Deploy to Azure App Service
+
+# Trigger on push to main/master branch
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  workflow_dispatch: # Allow manual trigger
+
+env:
+  # Azure configuration
+  AZURE_RESOURCE_GROUP: 'personal-page-rg'
+  AZURE_APP_NAME: 'personal-page-app'
+  AZURE_LOCATION: 'eastasia' # or your preferred region
+  
+  # .NET configuration
+  DOTNET_VERSION: '9.0.x'
+  CONFIGURATION: 'Release'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      - name: Restore NuGet packages
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --configuration ${{ env.CONFIGURATION }} --no-restore
+      
+      - name: Run unit tests
+        run: dotnet test --configuration ${{ env.CONFIGURATION }} --no-build --verbosity normal
+      
+      - name: Publish to folder
+        run: dotnet publish --configuration ${{ env.CONFIGURATION }} --output ./publish --no-build
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-app
+          path: ./publish
+          retention-days: 1
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-app
+          path: ./publish
+      
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_APP_NAME }}
+          package: './publish'
+          slot-name: production
+      
+      - name: Configure App Settings
+        run: |
+          az webapp config appsettings set \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --name ${{ env.AZURE_APP_NAME }} \
+            --settings \
+              WEBSITE_RUN_FROM_PACKAGE=1 \
+              ASPNETCORE_ENVIRONMENT=Production \
+              Owner__Name="${{ secrets.OWNER_NAME }}" \
+              Owner__Email="${{ secrets.OWNER_EMAIL }}"
+      
+      - name: Restart app
+        run: |
+          az webapp restart \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --name ${{ env.AZURE_APP_NAME }}
+      
+      - name: Verify deployment
+        run: |
+          for i in {1..30}; do
+            if curl -f https://${{ env.AZURE_APP_NAME }}.azurewebsites.net/; then
+              echo "✅ Deployment successful"
+              exit 0
+            fi
+            echo "Waiting for app to start... ($i/30)"
+            sleep 2
+          done
+          echo "❌ Deployment failed - app did not start"
+          exit 1
+      
+      - name: Post to Slack (optional)
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: 'Deployment to Azure ${{ job.status }}'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        continue-on-error: true
+
+  cleanup:
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Delete artifact
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: web-app

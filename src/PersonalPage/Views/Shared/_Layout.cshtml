@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Personal Page | หน้าส่วนตัว</title>
+    
+    <!-- Preconnect to system fonts and fallback -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Core styles -->
+    <link rel="stylesheet" href="~/css/style.css" />
+    
+    <!-- Meta tags for privacy-first approach -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="Personal contact page with name and email" />
+</head>
+<body>
+    <div class="page">
+        <main class="page__main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Core scripts -->
+    <script src="~/js/main.js" defer></script>
+</body>
+</html>

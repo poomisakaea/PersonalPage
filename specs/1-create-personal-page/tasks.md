@@ -11,19 +11,19 @@
 
 ## PHASE 1 — Setup (project initialization) | เฟส 1 — ติดตั้งเริ่มต้น (การเริ่มโปรเจค)
 
-- [ ] T001 **EN**: Create ASP.NET Core solution and web project at `src/PersonalPage/` | **TH**: สร้างโซลูชันและโปรเจค ASP.NET Core ที่ `src/PersonalPage/` — `src/PersonalPage/PersonalPage.csproj`
-- [ ] T002 [P] **EN**: Create repository README at `README.md` with build/run/publish summary and Azure hints | **TH**: สร้าง README ที่อธิบายการ build/run/publish และคำแนะนำการปรับใช้บน Azure — `README.md`
-- [ ] T003 [P] **EN**: Add `.gitignore` suitable for .NET projects | **TH**: เพิ่ม `.gitignore` ที่เหมาะสมกับโปรเจค .NET — `.gitignore`
-- [ ] T004 [P] **EN**: Add basic GitHub Actions CI workflow for .NET build at `.github/workflows/dotnet-ci.yml` (build + test) | **TH**: เพิ่ม workflow พื้นฐานของ GitHub Actions สำหรับการ build และทดสอบ .NET — `.github/workflows/dotnet-ci.yml`
+- [x] T001 **EN**: Create ASP.NET Core solution and web project at `src/PersonalPage/` | **TH**: สร้างโซลูชันและโปรเจค ASP.NET Core ที่ `src/PersonalPage/` — `src/PersonalPage/PersonalPage.csproj`
+- [x] T002 [P] **EN**: Create repository README at `README.md` with build/run/publish summary and Azure hints | **TH**: สร้าง README ที่อธิบายการ build/run/publish และคำแนะนำการปรับใช้บน Azure — `README.md`
+- [x] T003 [P] **EN**: Add `.gitignore` suitable for .NET projects | **TH**: เพิ่ม `.gitignore` ที่เหมาะสมกับโปรเจค .NET — `.gitignore`
+- [x] T004 [P] **EN**: Add basic GitHub Actions CI workflow for .NET build at `.github/workflows/dotnet-ci.yml` (build + test) | **TH**: เพิ่ม workflow พื้นฐานของ GitHub Actions สำหรับการ build และทดสอบ .NET — `.github/workflows/dotnet-ci.yml`
 
 ## PHASE 2 — Foundational (blocking prerequisites for stories) | เฟส 2 — พื้นฐาน (งานที่ต้องทำก่อนเริ่ม story)
 
-- [ ] T005 [P] **EN**: Create project folder structure (Controllers, Models, Views, wwwroot/css, wwwroot/js, wwwroot/assets) | **TH**: สร้างโฟลเดอร์โครงสร้างโปรเจคตามที่ระบุ — `src/PersonalPage/`
-- [ ] T006 [P] **EN**: Implement Owner model (Name, Email properties with basic validation) | **TH**: สร้างโมเดล Owner พร้อมคุณสมบัติ Name, Email และการตรวจสอบพื้นฐาน — `src/PersonalPage/Models/Owner.cs`
-- [ ] T007 [P] **EN**: Add basic layout and home view stubs (_Layout.cshtml, Index.cshtml) | **TH**: เพิ่มโครงร่าง layout และ view หน้าแรกแบบ stub — `src/PersonalPage/Views/`
-- [ ] T008 [P] **EN**: Add core static assets (style.css and main.js, BEM-ready) | **TH**: เพิ่มไฟล์ assets พื้นฐาน เช่น CSS และ JS ตามแนว BEM — `src/PersonalPage/wwwroot/`
-- [ ] T009 [P] **EN**: Create xUnit test project with sample test | **TH**: สร้างโปรเจคทดสอบ xUnit พร้อมตัวอย่างเทสต์ — `tests/PersonalPage.Tests/`
-- [ ] T010 [P] **EN**: Add specs/docs placeholders (acceptance-checklist.md, deployment-notes.md) | **TH**: เพิ่มไฟล์ placeholder สำหรับ acceptance checklist และ deployment notes — `specs/1-create-personal-page/`
+- [x] T005 [P] **EN**: Create project folder structure (Controllers, Models, Views, wwwroot/css, wwwroot/js, wwwroot/assets) | **TH**: สร้างโฟลเดอร์โครงสร้างโปรเจคตามที่ระบุ — `src/PersonalPage/`
+- [x] T006 [P] **EN**: Implement Owner model (Name, Email properties with basic validation) | **TH**: สร้างโมเดล Owner พร้อมคุณสมบัติ Name, Email และการตรวจสอบพื้นฐาน — `src/PersonalPage/Models/Owner.cs`
+- [x] T007 [P] **EN**: Add basic layout and home view stubs (_Layout.cshtml, Index.cshtml) | **TH**: เพิ่มโครงร่าง layout และ view หน้าแรกแบบ stub — `src/PersonalPage/Views/`
+- [x] T008 [P] **EN**: Add core static assets (style.css and main.js, BEM-ready) | **TH**: เพิ่มไฟล์ assets พื้นฐาน เช่น CSS และ JS ตามแนว BEM — `src/PersonalPage/wwwroot/`
+- [x] T009 [P] **EN**: Create xUnit test project with sample test | **TH**: สร้างโปรเจคทดสอบ xUnit พร้อมตัวอย่างเทสต์ — `tests/PersonalPage.Tests/`
+- [x] T010 [P] **EN**: Add specs/docs placeholders (acceptance-checklist.md, deployment-notes.md) | **TH**: เพิ่มไฟล์ placeholder สำหรับ acceptance checklist และ deployment notes — `specs/1-create-personal-page/`
 
 ## PHASE 3 — User Story Implementation (priority order) | เฟส 3 — การพัฒนาแต่ละ User Story (เรียงตามลำดับความสำคัญ)
 
@@ -35,23 +35,23 @@
 **EN**: Open `/` (home) on mobile and desktop and confirm name visible and email link or copy control works.
 **TH**: เปิด `/` บนมือถือและเดสก์ท็อป ตรวจสอบว่าชื่อปรากฏและการคลิกอีเมลหรือการคัดลอกทำงาน
 
-- [ ] T011 [US1] **EN**: Implement HomeController to return Index view with Owner data | **TH**: สร้าง HomeController เพื่อส่งข้อมูล Owner ไปยัง Index view — `src/PersonalPage/Controllers/HomeController.cs`
-- [ ] T012 [US1] **EN**: Implement Owner data provider (hard-coded or config-based) | **TH**: สร้างบริการ OwnerProvider เพื่อคืนข้อมูล Owner — `src/PersonalPage/Services/OwnerProvider.cs`
-- [ ] T013 [US1] **EN**: Implement Index.cshtml to render name and email (mailto and copy-to-clipboard) | **TH**: เขียน view เพื่อแสดงชื่อและอีเมลพร้อม mailto และปุ่มคัดลอก — `src/PersonalPage/Views/Home/Index.cshtml`
-- [ ] T014 [US1] **EN**: Implement CSS (BEM) for mobile-first responsive layout and focus styles | **TH**: เขียน CSS แบบ BEM ให้เป็น mobile-first และมีสไตล์ focus ที่เข้าถึงได้ — `src/PersonalPage/wwwroot/css/style.css`
-- [ ] T015 [P] [US1] **EN**: Implement JavaScript for copy-email with Clipboard API and fallback | **TH**: เขียน JS สำหรับคัดลอกอีเมลโดยใช้ Clipboard API พร้อม fallback — `src/PersonalPage/wwwroot/js/main.js`
-- [ ] T016 [US1] **EN**: Add unit tests for Owner model validation | **TH**: เพิ่ม unit test สำหรับการตรวจสอบ Owner model — `tests/PersonalPage.Tests/OwnerTests.cs`
-- [ ] T017 [US1] **EN**: Add integration test (TestServer) to verify `/` returns 200 with name/email | **TH**: เพิ่ม integration test ที่เรียก `/` และตรวจสอบสถานะ 200 และเนื้อหา — `tests/PersonalPage.Tests/HomeIntegrationTests.cs`
-- [ ] T018 [US1] **EN**: Add acceptance checklist for US1 with test steps (mobile/desktop, mailto, copy) | **TH**: เพิ่มไฟล์ acceptance checklist พร้อมขั้นตอนทดสอบ — `specs/1-create-personal-page/acceptance-checklist.md`
+- [x] T011 [US1] **EN**: Implement HomeController to return Index view with Owner data | **TH**: สร้าง HomeController เพื่อส่งข้อมูล Owner ไปยัง Index view — `src/PersonalPage/Controllers/HomeController.cs`
+- [x] T012 [US1] **EN**: Implement Owner data provider (hard-coded or config-based) | **TH**: สร้างบริการ OwnerProvider เพื่อคืนข้อมูล Owner — `src/PersonalPage/Services/OwnerProvider.cs`
+- [x] T013 [US1] **EN**: Implement Index.cshtml to render name and email (mailto and copy-to-clipboard) | **TH**: เขียน view เพื่อแสดงชื่อและอีเมลพร้อม mailto และปุ่มคัดลอก — `src/PersonalPage/Views/Home/Index.cshtml`
+- [x] T014 [US1] **EN**: Implement CSS (BEM) for mobile-first responsive layout and focus styles | **TH**: เขียน CSS แบบ BEM ให้เป็น mobile-first และมีสไตล์ focus ที่เข้าถึงได้ — `src/PersonalPage/wwwroot/css/style.css`
+- [x] T015 [P] [US1] **EN**: Implement JavaScript for copy-email with Clipboard API and fallback | **TH**: เขียน JS สำหรับคัดลอกอีเมลโดยใช้ Clipboard API พร้อม fallback — `src/PersonalPage/wwwroot/js/main.js`
+- [x] T016 [US1] **EN**: Add unit tests for Owner model validation | **TH**: เพิ่ม unit test สำหรับการตรวจสอบ Owner model — `tests/PersonalPage.Tests/OwnerTests.cs`
+- [x] T017 [US1] **EN**: Add integration test (TestServer) to verify `/` returns 200 with name/email | **TH**: เพิ่ม integration test ที่เรียก `/` และตรวจสอบสถานะ 200 และเนื้อหา — `tests/PersonalPage.Tests/HomeIntegrationTests.cs`
+- [x] T018 [US1] **EN**: Add acceptance checklist for US1 with test steps (mobile/desktop, mailto, copy) | **TH**: เพิ่มไฟล์ acceptance checklist พร้อมขั้นตอนทดสอบ — `specs/1-create-personal-page/acceptance-checklist.md`
 
 ## PHASE 4 — Polish & Cross-cutting Concerns | เฟส 4 — งานปรับแต่งและข้ามฟังก์ชัน
 
-- [ ] T019 [P] **EN**: Add accessibility fixes and checks (ARIA, keyboard, focus) | **TH**: ทำการปรับปรุง accessibility และบันทึกเป็นเอกสาร — `specs/1-create-personal-page/accessibility-notes.md`
-- [ ] T020 [P] **EN**: Add performance tuning (inline critical CSS, keep assets < 500KB) | **TH**: ปรับแต่งประสิทธิภาพและบันทึกผล — `specs/1-create-personal-page/performance-report.md`
-- [ ] T021 [P] **EN**: Create Azure deployment workflow (GitHub Actions) for App Service publish | **TH**: สร้าง workflow สำหรับปรับใช้ไปยัง Azure App Service — `.github/workflows/deploy-azure.yml`
-- [ ] T022 [P] **EN**: Add optional Dockerfile for App Service for Containers option | **TH**: เพิ่ม Dockerfile สำหรับตัวเลือกคอนเทนเนอร์ — `src/PersonalPage/Dockerfile`
-- [ ] T023 [P] **EN**: Add deployment docs with `az` CLI examples and GitHub Actions secrets | **TH**: เพิ่มเอกสารคำสั่ง `az` ตัวอย่างและการตั้งค่าสำหรับ GitHub Actions — `docs/deploy-azure.md`
-- [ ] T024 [P] **EN**: Polish final README with local dev, build, publish, and Azure notes | **TH**: ปรับปรุง README ให้สมบูรณ์ — `README.md`
+- [x] T019 [P] **EN**: Add accessibility fixes and checks (ARIA, keyboard, focus) | **TH**: ทำการปรับปรุง accessibility และบันทึกเป็นเอกสาร — `specs/1-create-personal-page/accessibility-notes.md`
+- [x] T020 [P] **EN**: Add performance tuning (inline critical CSS, keep assets < 500KB) | **TH**: ปรับแต่งประสิทธิภาพและบันทึกผล — `specs/1-create-personal-page/performance-report.md`
+- [x] T021 [P] **EN**: Create Azure deployment workflow (GitHub Actions) for App Service publish | **TH**: สร้าง workflow สำหรับปรับใช้ไปยัง Azure App Service — `.github/workflows/deploy-azure.yml`
+- [x] T022 [P] **EN**: Add optional Dockerfile for App Service for Containers option | **TH**: เพิ่ม Dockerfile สำหรับตัวเลือกคอนเทนเนอร์ — `src/PersonalPage/Dockerfile`
+- [x] T023 [P] **EN**: Add deployment docs with `az` CLI examples and GitHub Actions secrets | **TH**: เพิ่มเอกสารคำสั่ง `az` ตัวอย่างและการตั้งค่าสำหรับ GitHub Actions — `docs/deploy-azure.md`
+- [x] T024 [P] **EN**: Polish final README with local dev, build, publish, and Azure notes | **TH**: ปรับปรุง README ให้สมบูรณ์ — `README.md`
 
 ---
 

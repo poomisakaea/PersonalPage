@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+@model PersonalPage.Models.Owner
+
+<div class="card card--primary">
+    <h1 class="card__title">@Model?.Name</h1>
+    <div class="card__body">
+        <p>
+            <a href="mailto:@Model?.Email" class="email-link" data-email="@Model?.Email">
+                @Model?.Email
+            </a>
+            <button class="email-copy" type="button" id="copyEmail" aria-label="Copy email to clipboard">
+                Copy Email
+            </button>
+        </p>
+    </div>
+</div>

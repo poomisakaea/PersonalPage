@@ -1,0 +1,267 @@
+/* ==================================================
+   Base/Reset Styles
+   ================================================== */
+
+:root {
+  /* Colors - TH: สีพื้น */
+  --color-primary: #333;
+  --color-text: #333;
+  --color-text-light: #666;
+  --color-bg: #fff;
+  --color-border: #ddd;
+  --color-focus: #0066cc;
+  
+  /* Spacing - TH: ระยะห่าง */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Typography - TH: ความเป็นตัวอักษร */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans Thai', sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+  
+  /* Responsive - TH: การปรับตัว */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+/* ==================================================
+   BEM Components (Block Element Modifier)
+   ================================================== */
+
+/* Page - TH: หน้าเว็บ */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: var(--spacing-md);
+}
+
+.page__main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card - TH: การ์ด */
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--spacing-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.card--primary {
+  border-color: var(--color-focus);
+  border-width: 2px;
+}
+
+.card__title {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary);
+  word-wrap: break-word;
+}
+
+.card__body {
+  margin: 0;
+}
+
+/* Email Link - TH: ลิงก์อีเมล */
+.email-link {
+  color: var(--color-focus);
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.email-link:hover {
+  text-decoration: underline;
+}
+
+.email-link:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Email Copy Button - TH: ปุ่มคัดลอกอีเมล */
+.email-copy {
+  display: inline-block;
+  margin-left: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-focus);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.email-copy:hover {
+  background-color: #0052a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.email-copy:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.email-copy:active {
+  transform: translateY(0);
+}
+
+.email-copy--copied {
+  background-color: #28a745;
+}
+
+/* ==================================================
+   Accessibility
+   ================================================== */
+
+/* Focus visible - TH: โฟกัสที่มองเห็นได้ */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Reduced motion - TH: ลดการเคลื่อนไหว */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High contrast mode - TH: โหมดความเปรียบต่างสูง */
+@media (prefers-contrast: more) {
+  :root {
+    --color-primary: #000;
+    --color-text: #000;
+    --color-bg: #fff;
+    --color-border: #000;
+  }
+}
+
+/* ==================================================
+   Responsive Design (Mobile-First)
+   ================================================== */
+
+/* Mobile (default) - TH: มือถือ */
+@media (min-width: 0) {
+  .page {
+    padding: var(--spacing-md);
+  }
+
+  .card {
+    padding: var(--spacing-lg);
+  }
+
+  .card__title {
+    font-size: 1.75rem;
+  }
+
+  .email-link,
+  .email-copy {
+    display: inline-block;
+    font-size: 0.95rem;
+  }
+}
+
+/* Tablet - TH: แท็บเล็ต */
+@media (min-width: var(--breakpoint-md)) {
+  .page {
+    padding: var(--spacing-2xl);
+  }
+
+  .card {
+    padding: var(--spacing-2xl);
+  }
+
+  .card__title {
+    font-size: 2.5rem;
+  }
+
+  .email-link,
+  .email-copy {
+    font-size: 1rem;
+  }
+}
+
+/* Desktop - TH: เดสก์ท็อป */
+@media (min-width: var(--breakpoint-lg)) {
+  .page {
+    padding: var(--spacing-2xl) var(--spacing-xl);
+  }
+
+  .card {
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .card__title {
+    font-size: 3rem;
+  }
+}
+
+/* ==================================================
+   Animations
+   ================================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================================================
+   Print Styles
+   ================================================== */
+
+@media print {
+  .email-copy {
+    display: none;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
