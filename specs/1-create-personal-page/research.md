@@ -4,23 +4,20 @@
 ## การตัดสินใจหลัก
 ## Key Decisions
 
-### 1. การเลือกเฟรมเวิร์กฝั่งหน้าบ้าน | Frontend Framework Selection
-**การตัดสินใจ | Decision**: ใช้ HTML/CSS/JS แบบบริสุทธิ์โดยไม่มีเฟรมเวิร์ก | Pure HTML/CSS/JS without a framework  
+### 1. การเลือกเทคโนโลยีหลัก | Primary Technology Selection
+**การตัดสินใจ | Decision**: ใช้ ASP.NET Core MVC (.NET 8) เป็นเทคโนโลยีหลักสำหรับโปรเจคนี้ โดยยังคงใช้ HTML/CSS/JS (BEM) สำหรับส่วนหน้า
 
 **เหตุผล | Rationale**: 
-- TH: หน้าเว็บต้องการเพียงเนื้อหาแบบคงที่ (ชื่อและอีเมล) และการโต้ตอบน้อยที่สุด การใช้เฟรมเวิร์กจะเพิ่มความซับซ้อนและภาระโดยไม่จำเป็น
-- EN: The page requires only static content (name and email) and minimal interactivity. A framework would add unnecessary complexity and overhead.
+- TH: ความต้องการพัฒนาที่ซับซ้อนขึ้น (การตรวจสอบฝั่งเซิร์ฟเวอร์, ฟอร์ม, ความสามารถในการขยายในอนาคต) ต้องการโค้ดฝั่งเซิร์ฟเวอร์ที่จัดการได้ง่ายและปลอดภัย; ASP.NET Core ให้กรอบงานที่มั่นคงสำหรับงานนี้
+- EN: Increased server-side requirements (server validation, form handling, future extensibility) require maintainable server code; ASP.NET Core provides a robust framework for this use case
 
 **ทางเลือกที่พิจารณา | Alternatives Considered**:
 - ASP.NET Core MVC:
-  - TH: มีให้เลือกใช้แต่เพิ่มความซับซ้อนโดยไม่จำเป็นสำหรับหน้าเว็บแบบคงที่
-  - EN: Available as an option but adds unnecessary complexity for a static page
-- Next.js/React:
-  - TH: หนักเกินไปสำหรับเนื้อหาแบบง่าย
-  - EN: Too heavy for simple static content
-- Static Site Generators:
-  - TH: เกินความจำเป็นสำหรับหน้าเดียว
-  - EN: Overkill for a single static page
+  - TH: เหมาะสมสำหรับการเรนเดอร์ฝั่งเซิร์ฟเวอร์และการปรับใช้บน Azure
+  - EN: Well-suited for server-rendering and Azure deployment
+- Static-first (HTML/CSS/JS):
+  - TH: ยังคงเป็นทางเลือกที่เบา แต่ไม่ตรงกับความต้องการฝั่งเซิร์ฟเวอร์ที่เพิ่มขึ้น
+  - EN: Still lightweight but doesn't meet increasing server-side needs
 
 ### 2. วิธีการจัดการสไตล์ | Styling Approach
 **การตัดสินใจ | Decision**: ใช้ CSS ด้วยวิธี BEM | CSS with BEM methodology  
@@ -39,6 +36,37 @@
 - CSS Frameworks (Bootstrap):
   - TH: หนักเกินไปสำหรับความต้องการสไตล์ขั้นต่ำ
   - EN: Too heavy for minimal styling needs
+
+#### BEM คืออะไร / What is BEM?
+TH: BEM ย่อมาจาก Block — Element — Modifier เป็นแนวทางการตั้งชื่อตัวคลาส CSS ที่ช่วยทำให้โครงสร้างโค้ดชัดเจนและสามารถนำกลับมาใช้ซ้ำได้ง่าย โดยแบ่งส่วนประกอบเป็น:
+- Block: ส่วนประกอบหลัก (เช่น `card`)
+- Element: ส่วนย่อยของบล็อก (เช่น `card__title`)
+- Modifier: สถานะหรือรูปแบบที่แตกต่างของบล็อก/องค์ประกอบ (เช่น `card--large` หรือ `card__title--highlight`)
+
+EN: BEM stands for Block — Element — Modifier, a CSS naming methodology that makes class structure explicit and reusable. It separates UI into:
+- Block: the standalone component (e.g. `card`)
+- Element: a child part of the block (e.g. `card__title`)
+- Modifier: a flag on a block or element to change appearance/behavior (e.g. `card--large`, `card__title--highlight`)
+
+TH: ตัวอย่าง HTML/CSS แบบง่าย:
+
+```html
+<div class="card card--large">
+  <h2 class="card__title card__title--highlight">ชื่อ</h2>
+  <p class="card__body">คำอธิบายสั้น ๆ</p>
+</div>
+```
+
+```css
+.card { /* block styles */ }
+.card__title { /* element styles */ }
+.card--large { /* modifier styles for the block */ }
+.card__title--highlight { /* modifier styles for the element */ }
+```
+
+EN: Benefits of BEM:
+- TH: ช่วยให้ชื่อคลาสมีความสอดคล้อง, ลดการชนกันของสไตล์, และง่ายต่อการอ่าน/ดูแล
+- EN: Promotes consistent class names, reduces style collisions, and improves readability/maintainability
 
 ### 3. กลยุทธ์การจัดการฟอนต์ | Font Strategy
 **การตัดสินใจ | Decision**: 
@@ -59,20 +87,20 @@
 
 ### 4. กลยุทธ์การเผยแพร่ | Deployment Strategy
 **การตัดสินใจ | Decision**: 
-- TH: ใช้ GitHub Pages
-- EN: GitHub Pages
+- TH: ปรับเป็นการปรับใช้บน Azure App Service (หรือ App Service for Containers) เป็นหลัก เพื่อรองรับแอป ASP.NET Core และ pipeline CI/CD
+- EN: Target Azure App Service (or App Service for Containers) as the primary deployment target to host the ASP.NET Core app and enable CI/CD pipelines
 
 **เหตุผล | Rationale**: 
-- TH: ฟรี, การเผยแพร่ง่ายสำหรับเนื้อหาแบบคงที่, ผสานกับขั้นตอนการทำงานของ Git
-- EN: Free, simple deployment for static content, integrates with Git workflow
+- TH: Azure ผสานกับ ASP.NET Core ได้ดี มีบริการเช่น App Service, Managed Identity, และการเชื่อมต่อ CI/CD (GitHub Actions / Azure DevOps) ที่รองรับการปรับใช้แบบอัตโนมัติ
+- EN: Azure integrates well with ASP.NET Core and provides App Service, managed identities, and CI/CD capabilities (GitHub Actions / Azure DevOps) for automated deployments
 
 **ทางเลือกที่พิจารณา | Alternatives Considered**:
 - Netlify/Vercel:
-  - TH: เป็นทางเลือกที่เป็นไปได้แต่ GitHub Pages ง่ายกว่าสำหรับการโฮสต์แบบคงที่พื้นฐาน
-  - EN: Viable alternatives but GitHub Pages is simpler for basic static hosting
-- Azure (for ASP.NET Core option):
-  - TH: ไม่จำเป็นเว้นแต่ต้องการฟีเจอร์ฝั่งเซิร์ฟเวอร์
-  - EN: Unnecessary unless server-side features needed
+  - TH: เหมาะสำหรับ static hosting แต่ไม่เหมาะสำหรับแอป ASP.NET Core ที่ต้องการ runtime ฝั่งเซิร์ฟเวอร์
+  - EN: Suitable for static hosts but not for runtime-hosted ASP.NET Core apps
+- GitHub Pages:
+  - TH: ไม่เหมาะสำหรับโฮสต์แอป ASP.NET Core
+  - EN: Not suitable for hosting ASP.NET Core apps
 
 ### 5. การวิเคราะห์และความเป็นส่วนตัว | Analytics & Privacy
 **การตัดสินใจ | Decision**: 

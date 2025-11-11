@@ -12,40 +12,40 @@ EN: Create a simple, responsive single-page website displaying the owner's name 
 ## บริบททางเทคนิค | Technical Context
 
 **ภาษา/เวอร์ชัน | Language/Version**: 
-- TH: HTML5, CSS3, JavaScript ES2022
-- EN: HTML5, CSS3, JavaScript ES2022
+- TH: หลักเป็น C# / .NET 8 (ASP.NET Core 8.0 MVC) สำหรับฝั่งเซิร์ฟเวอร์; ฝั่งหน้าเป็น HTML5/CSS3/JS
+- EN: Primary: C# / .NET 8 (ASP.NET Core 8.0 MVC); Frontend: HTML5/CSS3/JavaScript (ES2022)
 
 **การพึ่งพาหลัก | Primary Dependencies**: 
-- TH: ไม่มี (HTML/CSS/JS บริสุทธิ์) | ตัวเลือก: ASP.NET Core 8.0 MVC
-- EN: None (pure HTML/CSS/JS) | Optional: ASP.NET Core 8.0 MVC
+- TH: ASP.NET Core 8.0 MVC, Microsoft.Extensions.*, (Frontend: BEM-style CSS, เลือกไลบรารีเบาๆ เท่าที่จำเป็น)
+- EN: ASP.NET Core 8.0 MVC, Microsoft.Extensions.*; Frontend: BEM CSS, minimal libraries as needed
 
 **การจัดเก็บ | Storage**: 
-- TH: ไฟล์คงที่ (HTML/CSS/JS)
-- EN: Static files (HTML/CSS/JS)
+- TH: ไฟล์คงที่และทรัพยากรใน `wwwroot` ของแอป ASP.NET Core; ไม่มีฐานข้อมูลสำหรับ MVP (N/A)
+- EN: Static assets served from `wwwroot`; no database for MVP (N/A)
 
 **การทดสอบ | Testing**: 
-- TH: W3C Validator, Lighthouse, aXe สำหรับการเข้าถึง
-- EN: W3C Validator, Lighthouse, aXe for accessibility
+- TH: xUnit สำหรับ unit tests, integration tests (TestServer), W3C Validator, Lighthouse, aXe
+- EN: xUnit for unit tests, integration tests (TestServer), W3C Validator, Lighthouse, aXe
 
 **แพลตฟอร์มเป้าหมาย | Target Platform**: 
-- TH: เว็บเบราว์เซอร์ (มือถือก่อน)
-- EN: Web browsers (mobile-first)
+- TH: Azure App Service (หรือ App Service for Containers) เป็นเป้าหมายการปรับใช้หลัก
+- EN: Azure App Service (or App Service for Containers) is the primary deployment target
 
 **ประเภทโครงการ | Project Type**: 
-- TH: เว็บแอปพลิเคชันหน้าเดียว
-- EN: Single-page web application
+- TH: แอปเว็บแบบ server-rendered (ASP.NET Core MVC) พร้อม API เล็ก ๆ สำหรับข้อมูลเจ้าของและสุขภาพระบบ
+- EN: Server-rendered web application (ASP.NET Core MVC) with a minimal API surface for owner data and health checks
 
 **เป้าหมายประสิทธิภาพ | Performance Goals**: 
-- TH: เวลาโหลด < 3 วินาที, ขนาดรวม < 500KB
-- EN: Load time < 3s, Total size < 500KB
+- TH: Response time < 200ms p95 สำหรับหน้าแรก, เวลาโหลด < 3 วินาทีบนเครือข่ายปกติ, ขนาด assets < 500KB
+- EN: Response time < 200ms p95 for homepage, load time < 3s on typical networks, assets < 500KB
 
 **ข้อจำกัด | Constraints**: 
-- TH: ต้องรองรับภาษาไทย, ความเป็นส่วนตัวมาก่อน (ไม่มีการติดตาม)
-- EN: Thai language support required, Privacy-first (no tracking)
+- TH: ต้องรองรับภาษาไทย, ความเป็นส่วนตัว (no tracking), และต้องปรับใช้บน Azure
+- EN: Must support Thai, privacy-first (no tracking), and be deployable to Azure
 
 **ขนาด/ขอบเขต | Scale/Scope**: 
-- TH: หน้าเดียว, 2 ฟีเจอร์หลัก (แสดงชื่อ + ติดต่ออีเมล)
-- EN: Single page, 2 core features (name display + email contact)
+- TH: แอปขนาดเล็กที่มีการเรนเดอร์ฝั่งเซิร์ฟเวอร์สำหรับหน้าเดียวและ API สำหรับขยายในอนาคต
+- EN: Small web app with server-side rendering for one page and expandable API surface
 
 ## Constitution Check
 
@@ -121,9 +121,9 @@ src/
 ```
 
 **การตัดสินใจโครงสร้าง | Structure Decision**: 
-TH: ใช้ตัวเลือก 1 (การดำเนินการแบบคงที่) เป็นค่าเริ่มต้นเนื่องจากตอบสนองความต้องการทั้งหมดด้วยความซับซ้อนน้อยที่สุด ตัวเลือก 2 (ASP.NET Core MVC) มีให้ใช้แต่ต้องมีเหตุผลรองรับการใช้งาน
+TH: ยืนยันให้ใช้ตัวเลือก 2 (ASP.NET Core MVC) เป็นค่าเริ่มต้นสำหรับการพัฒนานี้ เนื่องจากความต้องการฟีเจอร์ฝั่งเซิร์ฟเวอร์และแผนการปรับใช้บน Azure ทำให้ต้องมีโครงสร้างฝั่งเซิร์ฟเวอร์และ pipeline ที่ชัดเจน
 
-EN: Default to Option 1 (Static Implementation) as it satisfies all requirements with minimal complexity. Option 2 (ASP.NET Core MVC) is available but requires justification for use.
+EN: Confirm Option 2 (ASP.NET Core MVC) as the default architecture for this work. The server-side features and Azure deployment plan require a server-rendered application and a clear CI/CD pipeline.
 
 ## การติดตามความซับซ้อน | Complexity Tracking
 

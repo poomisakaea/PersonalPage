@@ -88,6 +88,17 @@ EN: The page is intentionally minimal to make contact info clear and minimize lo
 - TH: หากต้องการใช้ ASP.NET Core MVC (.NET Core) ให้ถือเป็นตัวเลือกเสริม แต่ไม่จำเป็นสำหรับความต้องการขั้นต่ำนี้: หากใช้ต้องอธิบายการ build/publish ใน README และรักษาผลลัพธ์สุดท้ายให้ง่ายและเร็ว
 	EN: ASP.NET Core MVC is optional; if used, document build/publish steps in README and keep final output simple and fast
 
+--
+
+### Updated decision: ASP.NET Core required / การตัดสินใจที่อัปเดต: ยืนยันการใช้ ASP.NET Core
+TH: เนื่องจากความต้องการพัฒนาที่ซับซ้อนขึ้น (เช่น การจัดการฟอร์ม, การตรวจสอบฝั่งเซิร์ฟเวอร์, การขยายในอนาคต) ให้ถือว่าโปรเจคนี้จะถูกพัฒนาเป็นแอป ASP.NET Core MVC (.NET 8) เป็นหลัก แทนการเป็น static-only
+
+EN: Due to increased development complexity (server-side form handling, server validation, and future extensibility), this project will be implemented primarily as an ASP.NET Core MVC application (targeting .NET 8), rather than static-only.
+
+TH: การตัดสินใจนี้ส่งผลให้ต้องมีโครงสร้างโค้ดฝั่งเซิร์ฟเวอร์, รายละเอียดการ build/publish, การทดสอบหน่วยและการทดสอบอินทิเกรชันเพิ่มเติม และเอกสารการปรับใช้บน Azure
+
+EN: This decision implies server-side code structure, explicit build/publish details, unit/integration tests, and deployment documentation for Azure.
+
 ## Constraints / ข้อจำกัด
 - TH: หลีกเลี่ยงเฟรมเวิร์กขนาดใหญ่หากหน้าเดียวเพียงพอ  
 	EN: Avoid large frameworks when a single page suffices
@@ -107,6 +118,14 @@ EN: The page is intentionally minimal to make contact info clear and minimize lo
 
 - TH: ถ้ามีการใช้ ASP.NET Core MVC ให้แนบตัวอย่างคำสั่ง build & publish (`dotnet build`, `dotnet publish`) และตัวอย่าง `Dockerfile` ถ้าจำเป็น  
 	EN: If using ASP.NET Core MVC, include sample build & publish commands (`dotnet build`, `dotnet publish`) and a sample `Dockerfile` if needed
+
+### Updated deliverables for ASP.NET Core + Azure
+- TH: แอป ASP.NET Core MVC (ซอร์สโค้ด) พร้อม `README` ที่มีคำสั่ง build/run/publish, ตัวอย่าง `Dockerfile` (ถ้าจำเป็น), และไฟล์การปรับใช้สำหรับ Azure (ตัวอย่าง: `azure-webapp` deployment docs หรือ GitHub Actions workflow)
+	EN: ASP.NET Core MVC application source with README covering build/run/publish steps, sample Dockerfile (optional), and Azure deployment artifacts (e.g., example GitHub Actions workflow or ARM/Bicep templates)
+- TH: ตัวอย่าง OpenAPI (หรือ endpoints documentation) สำหรับ endpoint ฝั่งเซิร์ฟเวอร์ เช่น `/api/owner` และ `/health`
+	EN: Example OpenAPI / endpoints documentation for server endpoints such as `/api/owner` and `/health`
+- TH: pipeline หรือคำแนะนำการปรับใช้บน Azure App Service (หรือ Azure App Service for Containers) รวมตัวอย่าง `az` commands และตัวเลือกการ deploy (ZIP Deploy, GitHub Actions)
+	EN: Deployment pipeline or guidance for Azure App Service (or App Service for Containers) including sample `az` commands and deployment options (ZIP Deploy, GitHub Actions)
 
 ## Notes / Clarifications made by author / หมายเหตุ
 - TH: สเปคนี้ถูกย่อให้แสดงเพียงชื่อและอีเมลตามคำขอของผู้ใช้งาน
